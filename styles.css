@@ -1,4 +1,4 @@
-.img1 {
+/* .img1 {
   content: url("https://picsum.photos/id/237/200/300");
 }
 
@@ -37,4 +37,32 @@ p {
 
 button {
   margin: 20px;
+}   */
+
+.img1, .img2, .img3, .img4, .img5, .img6 {
+  margin: 10px;
+  border: 5px solid #555;
+  width: 10%;
+  cursor: pointer;
 }
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+.selected {
+  border: 5px solid rgb(0, 195, 255);
+}
+
+p {
+  text-align: center;
+}
+
+button {
+  margin: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+ 
