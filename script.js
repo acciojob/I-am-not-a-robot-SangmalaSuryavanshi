@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
       "https://picsum.photos/200/300/", 
       "https://picsum.photos/200/300.jpg"
     ];
-    
+
+	  
+
     const randomIndex = Math.floor(Math.random() * 5); 
     duplicateImage = imgSources[randomIndex]; // Pick one random image to duplicate
     
@@ -77,3 +79,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
   images.forEach(img => img.addEventListener('click', handleImageClick));
 });
+describe('Robot blocker test', () => {
+  beforeEach(() => {
+    cy.visit('/');
+  });
+
+  it('should display the initial message', () => {
+    cy.get('h3').should('have.attr', 'id').should('include', 'h');
+    cy.get('h3').contains('Please click on the identical tiles to verify that you are not a robot.');
+  });
+
+  it('should show reset button when an image is clicked', () => {
+    cy.get('.img1').first().click();
+    cy.get('#reset').should('be.visible');
+  });
+
+  it('should show verify button after selecting two images', () => {
+    cy.get('.img1').first().click();
+    cy.get('.img2').first().click();
+    cy.get('#verify').should('be.visible');
+  });
+
+  it('should display a success message if the selected images are identical', () => {
+    cy.get('.img1').first().click();
+    cy.get('.img2').first().click();
+    cy.get('#verify').click();
+    cy.get('#para').contains('You are a human. Congratulations!');
+  });
+
+  it('should display an error message if the selected images are not identical', () => {
+    cy.get('.img1').first().click();
+    cy.get('.img3').first().click();
+    cy.get('#verify').click();
+    cy.get('#para').contains("We can't verify you as a human. You selected the non-identical tiles.");
+  });
+});
+
